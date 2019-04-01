@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style>
+			body {
+			  margin: 0;
+			}
+			
+			.wrapper {
+			 background-color: #beecca;
+			 padding: 10px;
+			}
+			.content {
+			  width: 50%;
+			  margin: 0 auto;
+			  text-align: center;
+			}
+			
+			h2 {
+			}
+			input[id=items] {
+			  padding: 10px;
+			  font-size: 14px;
+			  color: #ffffff;
+			  background-color: rgba(100, 1, 2, 0.6);
+			  border: 1px solid #fff;
+			}
+			
+			button {
+			  border: none;
+			  font-size: 14px;
+			  padding: 5px 10px;
+			}
+			
+			ul {
+			    margin: 0;
+			    padding: 0;
+			    list-style-type: none;
+			}
+			ul li:nth-child(odd) {
+			    background: #d6d1d1;
+			}
+			
+			ul li.checked {
+			  background: #888;
+			  color: #ffffff;
+			  text-decoration: line-through;
+			}
+			
+			.list-items {
+			  background-color: #886054;
+			  padding: 10px 5px;
+			}
+			
+			.close {
+			  float: right;
+			  cursor: pointer;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="wrapper">
+		  <div class="content">
+		    <h2>My To-Do List</h2>
+		    <input type="text" name="items" id="items">
+		    <button id="add">Add</button>
+		    <button id="clear">Clear</button>
+		  </div>
+		</div>
+		
+		
+		<ul class="lists">
+		</ul>
+		
+		<script>
+			let inputVal = document.querySelector('#items');
+			let addBtn = document.querySelector('#add');
+			let clearBtn = document.querySelector('#clear');
+			let ulList = document.querySelector('.lists');
+			
+			addBtn.addEventListener('click', function(e){
+			  e.preventDefault();
+			  
+			  
+			  if(inputVal.value === ''){
+			    alert('Please write something');
+			  } else {
+			    
+			    let liElement = document.createElement('li');
+			    let spanElement = document.createElement('span');
+			    liElement.textContent = inputVal.value;
+			    liElement.classList.add('list-items');
+			    spanElement.textContent = "\u00D7";
+			    spanElement.classList.add('close');
+			    ulList.appendChild(liElement); 
+			    liElement.appendChild(spanElement);
+			  }
+			  
+			  inputVal.value = '';
+			});//adds the item to unordered list
+			
+			clearBtn.addEventListener('click', function(e){
+			   ulList.style.display = 'none';
+			   window.location.reload();
+			
+			}); //clears the entire to-do list
+			
+			//clicking on the 'x' will delete the current item
+			ulList.addEventListener('click', function(e){
+			 var howMany = this.querySelectorAll('li').length;
+			 var removeTarget = e.target.parentNode;
+			  if(e.target.tagName === 'SPAN'){
+			      
+			      removeTarget.parentNode.removeChild(removeTarget);
+			  }
+			  
+			   if(e.target.tagName === 'LI'){                 
+				   e.target.classList.toggle('checked');
+				   
+			   } //strikethrough the complete items
+			
+			
+			  
+			  //console.log(removeTarget);
+			  //console.log(howMany);
+			}, false);
+
+		</script>
+	</body>
+</html>
+
+
+
+
