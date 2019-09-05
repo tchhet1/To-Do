@@ -86,10 +86,15 @@
 			let clearBtn = document.querySelector('#clear');
 			let ulList = document.querySelector('.lists');
 			
-			addBtn.addEventListener('click', function(e){
-			  e.preventDefault();
-			  
-			  
+			addBtn.addEventListener('click', addItems);
+            
+            inputVal.addEventListener('keydown', keyAddItems);
+          
+            
+         
+            
+            function addItems(){
+                 
 			  if(inputVal.value === ''){
 			    alert('Please write something');
 			  } else {
@@ -103,9 +108,14 @@
 			    ulList.appendChild(liElement); 
 			    liElement.appendChild(spanElement);
 			  }
-			  
-			  inputVal.value = '';
-			});//adds the item to unordered list
+                inputVal.value = '';
+            } //function that adds the item to unordered list
+            
+               function keyAddItems(e){
+                if(e.keyCode === 13){
+                    addItems();
+                }
+            }
 			
 			clearBtn.addEventListener('click', function(e){
 			   ulList.style.display = 'none';
